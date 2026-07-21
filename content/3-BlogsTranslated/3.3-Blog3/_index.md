@@ -41,7 +41,7 @@ Depending on the game mode, the game applies different backend architectures:
 
 Through the practical Simple Trivia Service project, it has been proven that a complete AWS ecosystem can smoothly and flexibly handle even the most demanding requirements of the gaming industry. Serverless architecture is not merely a cost-optimization solution, but it is truly reshaping the design and operational mindset of game developers. By completely removing the burden of server configuration and infrastructure management, the "serverless-first" approach empowers development teams to pour all their dedication into the most core aspects: content creation, enhancing player experience, and maximizing time-to-market reduction.
 
-![Blog3](/images/3-BlogsPosted/Blog3.png)
+![Blog3](/images/3-Blog/blog3.png)
 
 [Link to published blog post](https://www.facebook.com/groups/awsstudygroupfcj/posts/2209312269833733?locale=en_US)
 
