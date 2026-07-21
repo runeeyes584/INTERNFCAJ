@@ -41,7 +41,7 @@ Quản trị qua Catalog (Managed & Federated): SageMaker hỗ trợ cả Manage
 Xây dựng kiến trúc Lakehouse không đơn thuần là việc lựa chọn giữa hồ dữ liệu hay kho dữ liệu. Đó là một chiến lược về khả năng tương tác, nơi cả hai khung giải pháp cùng tồn tại và bổ trợ cho nhau trong một hệ sinh thái dữ liệu hợp nhất.
 Bằng cách tận dụng Amazon SageMaker cùng các định dạng bảng mở như Apache Iceberg, doanh nghiệp có thể xây dựng những hệ thống dữ liệu có khả năng mở rộng cao, hiệu suất mạnh mẽ và sẵn sàng cho các ứng dụng AI/Machine Learning trong tương lai. Việc hiểu rõ các mô hình lưu trữ và phương thức tích hợp dữ liệu sẽ là chìa khóa để bạn tối ưu hóa cả về chi phí lẫn hiệu quả vận hành cho tổ chức của mình.
 
-![Blog1](/images/3-Blog/Blog1.png)
+![Blog1](/images/3-Blog/blog1.png)
 
 [Link bài blog đã đăng](https://www.facebook.com/groups/awsstudygroupfcj/posts/2195960164502277/?locale=vi_VN)
 

@@ -40,7 +40,7 @@ Catalog Governance (Managed & Federated): SageMaker supports both Managed Catalo
 Building a Lakehouse architecture is not simply about choosing between a data lake or a data warehouse. It is a strategy of interoperability, where both solution frameworks coexist and complement each other in a unified data ecosystem.
 By leveraging Amazon SageMaker along with open table formats like Apache Iceberg, enterprises can build data systems that are highly scalable, powerfully performant, and ready for future AI/Machine Learning applications. Understanding storage models and data integration methods will be the key to optimizing both cost and operational efficiency for your organization.
 
-![Blog1](/images/3-Blog/Blog1.png)
+![Blog1](/images/3-Blog/blog1.png)
 
 [Link to published blog post](https://www.facebook.com/groups/awsstudygroupfcj/posts/2195960164502277/?locale=en_US)
 
