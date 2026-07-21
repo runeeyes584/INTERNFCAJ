@@ -5,119 +5,67 @@ weight: 1
 chapter: false
 pre: " <b> 3.2. </b> "
 ---
-# Getting Started with Healthcare Data Lakes: Using Microservices
 
-Data lakes can help hospitals and healthcare facilities turn data into business insights, maintain business continuity, and protect patient privacy. A **data lake** is a centralized, managed, and secure repository to store all your data, both in its raw and processed forms for analysis. Data lakes allow you to break down data silos and combine different types of analytics to gain insights and make better business decisions.
+# BUILDING A CONTEXTUAL CHATBOT APPLICATION USING KNOWLEDGE BASES FOR AMAZON BEDROCK
 
-This blog post is part of a larger series on getting started with setting up a healthcare data lake. In my final post of the series, *“Getting Started with Healthcare Data Lakes: Diving into Amazon Cognito”*, I focused on the specifics of using Amazon Cognito and Attribute Based Access Control (ABAC) to authenticate and authorize users in the healthcare data lake solution. In this blog, I detail how the solution evolved at a foundational level, including the design decisions I made and the additional features used. You can access the code samples for the solution in this Git repo for reference.
+## INTRODUCTION
 
----
+Modern chatbots provide 24/7 customer support services with the capability to process multiple queries simultaneously in various languages. Although Large Language Models (LLMs) bring natural understanding and response capabilities, if a chatbot can only answer basic questions, its overall utility remains limited.
+To make a chatbot more reliable, we need to connect it with internal information systems and databases. Integrating this proprietary data allows the chatbot to personalize responses and tailor its language to match the user's expertise.
 
-## Architecture Guidance
+## RETRIEVAL AUGMENTED GENERATION (RAG) ARCHITECTURE
 
-The main change since the last presentation of the overall architecture is the decomposition of a single service into a set of smaller services to improve maintainability and flexibility. Integrating a large volume of diverse healthcare data often requires specialized connectors for each format; by keeping them encapsulated separately as microservices, we can add, remove, and modify each connector without affecting the others. The microservices are loosely coupled via publish/subscribe messaging centered in what I call the “pub/sub hub.”
+The most common way to bring context to LLMs is by using Retrieval Augmented Generation (RAG) architecture. This method combines the text generation power of LLMs with the ability to search and extract factual information from a database.
 
-This solution represents what I would consider another reasonable sprint iteration from my last post. The scope is still limited to the ingestion and basic parsing of **HL7v2 messages** formatted in **Encoding Rules 7 (ER7)** through a REST interface.
+The RAG workflow consists of two main streams:
 
-**The solution architecture is now as follows:**
+- Data Ingestion: Uses an LLM to generate vector embeddings representing the meaning of documents. Documents are split into chunks and stored as indexes in a vector database.
+- Text Generation: Converts user questions into vectors, retrieves the most similar document chunks from the database to supplement context, and then prompts the LLM to generate an answer based on that context.
 
-> *Figure 1. Overall architecture; colored boxes represent distinct services.*
+Building a RAG system manually is complex because it requires high-level engineering skills to manage dependencies across databases, search mechanisms, prompt engineering, and generative models. It can take weeks for an engineering team just to set up and optimize.
 
----
+## AMAZON BEDROCK KNOWLEDGE BASES - THE OPTIMAL SERVERLESS SOLUTION
 
-While the term *microservices* has some inherent ambiguity, certain traits are common:  
-- Small, autonomous, loosely coupled  
-- Reusable, communicating through well-defined interfaces  
-- Specialized to do one thing well  
-- Often implemented in an **event-driven architecture**
+To reduce engineering overhead, Amazon Bedrock Knowledge Bases provides a serverless RAG system that automatically manages both the data ingestion and text generation workflows.
 
-When determining where to draw boundaries between microservices, consider:  
-- **Intrinsic**: technology used, performance, reliability, scalability  
-- **Extrinsic**: dependent functionality, rate of change, reusability  
-- **Human**: team ownership, managing *cognitive load*
+- The `StartIngestionJob` API automates document chunking, vector embedding creation, and storage.
+- The `RetrieveAndGenerate` API automatically retrieves relevant information and generates accurate responses.
 
----
+## CHATBOT SOLUTION ARCHITECTURE OVERVIEW
 
-## Technology Choices and Communication Scope
+The architecture design workflow includes the following steps:
 
-| Communication scope                       | Technologies / patterns to consider                                                        |
-| ----------------------------------------- | ------------------------------------------------------------------------------------------ |
-| Within a single microservice              | Amazon Simple Queue Service (Amazon SQS), AWS Step Functions                               |
-| Between microservices in a single service | AWS CloudFormation cross-stack references, Amazon Simple Notification Service (Amazon SNS) |
-| Between services                          | Amazon EventBridge, AWS Cloud Map, Amazon API Gateway                                      |
+1. Users upload datasets to Amazon S3 (acting as the data source).
+2. Amazon S3 invokes an AWS Lambda function to sync the data source with the knowledge base via `StartIngestionJob`.
+3. The system chunks the documents, uses the Amazon Titan model to generate embeddings, and stores them in an Amazon OpenSearch Serverless vector store.
+4. On the user interface, users ask questions in natural language.
+5. The query is sent via Amazon API Gateway to another Lambda function, which calls the `RetrieveAndGenerate` API.
+6. Bedrock uses the Titan model to search for similar text and then sends this context along with the question to the Anthropic Claude Instant 1.2 LLM to generate a response. Claude Instant 1.2 was selected due to its fast speed, cost efficiency, and strong conversational handling.
+7. Finally, users receive an answer with specific citations.
 
----
+## PREREQUISITES
 
-## The Pub/Sub Hub
+To set up this solution, you need to:
+- Request access to the Amazon Titan Embeddings G1 – Text and Claude Instant 1.2 models in Amazon Bedrock.
+- Select an AWS Region supported by Amazon Bedrock.
+- For local deployment, install and configure AWS CLI, AWS CDK, Node.js 20.x, and Docker.
 
-Using a **hub-and-spoke** architecture (or message broker) works well with a small number of tightly related microservices.  
-- Each microservice depends only on the *hub*  
-- Inter-microservice connections are limited to the contents of the published message  
-- Reduces the number of synchronous calls since pub/sub is a one-way asynchronous *push*
+## SOLUTION DEPLOYMENT
 
-Drawback: **coordination and monitoring** are needed to avoid microservices processing the wrong message.
+The solution is available in the GitHub repository: https://github.com/aws-samples/amazon-bedrock-rag
 
----
+Complete the following steps to deploy the solution:
 
-## Core Microservice
+1. From the command line, navigate to the backend directory: `cd backend`
+2. Install the necessary dependencies: `npm install`
+3. Use AWS CDK to deploy the backend of the chatbot application: `cdk deploy --context allowedip="xxx.xxx.xxx.xxx/32"`
 
-Provides foundational data and communication layer, including:  
-- **Amazon S3** bucket for data  
-- **Amazon DynamoDB** for data catalog  
-- **AWS Lambda** to write messages into the data lake and catalog  
-- **Amazon SNS** topic as the *hub*  
-- **Amazon S3** bucket for artifacts such as Lambda code
+## CONCLUSION
 
-> Only allow indirect write access to the data lake through a Lambda function → ensures consistency.
+Through its built-in RAG architecture, Amazon Bedrock Knowledge Bases thoroughly addresses the operational complexities of information retrieval systems. The result is a superior Chatbot application capable of querying proprietary company data, providing highly personalized answers while maintaining transparency regarding information sources. Furthermore, the entire infrastructure of this project is packaged as Infrastructure as Code via AWS CDK, making it easy to deploy, customize, and scale on the AWS environment.
 
----
+![Blog2](/images/3-Blog/blog2.png)
 
-## Front Door Microservice
+[Link to published blog post](https://www.facebook.com/groups/awsstudygroupfcj/posts/2208429953255298/?locale=en_US)
 
-- Provides an API Gateway for external REST interaction  
-- Authentication & authorization based on **OIDC** via **Amazon Cognito**  
-- Self-managed *deduplication* mechanism using DynamoDB instead of SNS FIFO because:  
-  1. SNS deduplication TTL is only 5 minutes  
-  2. SNS FIFO requires SQS FIFO  
-  3. Ability to proactively notify the sender that the message is a duplicate  
-
----
-
-## Staging ER7 Microservice
-
-- Lambda “trigger” subscribed to the pub/sub hub, filtering messages by attribute  
-- Step Functions Express Workflow to convert ER7 → JSON  
-- Two Lambdas:  
-  1. Fix ER7 formatting (newline, carriage return)  
-  2. Parsing logic  
-- Result or error is pushed back into the pub/sub hub  
-
----
-
-## New Features in the Solution
-
-### 1. AWS CloudFormation Cross-Stack References
-Example *outputs* in the core microservice:
-```yaml
-Outputs:
-  Bucket:
-    Value: !Ref Bucket
-    Export:
-      Name: !Sub ${AWS::StackName}-Bucket
-  ArtifactBucket:
-    Value: !Ref ArtifactBucket
-    Export:
-      Name: !Sub ${AWS::StackName}-ArtifactBucket
-  Topic:
-    Value: !Ref Topic
-    Export:
-      Name: !Sub ${AWS::StackName}-Topic
-  Catalog:
-    Value: !Ref Catalog
-    Export:
-      Name: !Sub ${AWS::StackName}-Catalog
-  CatalogArn:
-    Value: !GetAtt Catalog.Arn
-    Export:
-      Name: !Sub ${AWS::StackName}-CatalogArn
-
+[Link to reference material](https://aws.amazon.com/blogs/machine-learning/build-a-contextual-chatbot-application-using-knowledge-bases-for-amazon-bedrock/)
