@@ -67,7 +67,7 @@ chapter: false
 
 </div>
 <div class="student-photo">
-  <img src="/INTERNFCAJ/images/MS.jpg" alt="Student photo" />
+  <img src="/images/MS.jpg" alt="Student photo" />
   <p>Lê Anh Tiến</p>
 </div>
 </div>
