@@ -1,19 +1,28 @@
 ---
-title : "Giới thiệu"
+title : "Giới thiệu tổng quan & Kiến trúc dự án "
 date : 2024-01-01 
 weight : 1
 chapter : false
 pre : " <b> 5.1. </b> "
 ---
 
-#### Giới thiệu về VPC Endpoint
+#### Giới thiệu về AWS Serverless Architecture
+Serverless (Kiến trúc không máy chủ) là một mô hình thực thi điện toán đám mây cho phép bạn xây dựng và chạy các ứng dụng mà không cần phải quản lý, vận hành hay bảo trì hệ thống máy chủ vật lý hoặc máy chủ ảo.
++ Rút ngắn thời gian đưa sản phẩm ra thị trường: Đội ngũ phát triển có thể nhanh chóng hiện thực hóa ý tưởng và phát hành tính năng mới mà không bị rào cản bởi công đoạn hạ tầng.
 
-+ Điểm cuối VPC (endpoint) là thiết bị ảo. Chúng là các thành phần VPC có thể mở rộng theo chiều ngang, dự phòng và có tính sẵn sàng cao. Chúng cho phép giao tiếp giữa tài nguyên điện toán của bạn và dịch vụ AWS mà không gây ra rủi ro về tính sẵn sàng.
-+ Tài nguyên điện toán đang chạy trong VPC có thể truy cập Amazon S3 bằng cách sử dụng điểm cuối Gateway. Interface Endpoint  PrivateLink có thể được sử dụng bởi tài nguyên chạy trong VPC hoặc tại TTDL.
++ Tối ưu hóa chi phí: Tối đa hóa hiệu quả sử dụng ngân sách nhờ loại bỏ hoàn toàn chi phí duy trì tài nguyên.
+
++ Độ tin cậy và bảo mật cao: Dễ dàng áp dụng các tiêu chuẩn bảo mật khắt khe của AWS cùng các cơ chế phân quyền hạt mịn (fine-grained IAM policies).
 
 #### Tổng quan về workshop
-Trong workshop này, bạn sẽ sử dụng hai VPC.
-+ **"VPC Cloud"** dành cho các tài nguyên cloud như Gateway endpoint và EC2 instance để kiểm tra.
-+ **"VPC On-Prem"** mô phỏng môi trường truyền thống như nhà máy hoặc trung tâm dữ liệu của công ty. Một EC2 Instance chạy phần mềm StrongSwan VPN đã được triển khai trong "VPC On-prem" và được cấu hình tự động để thiết lập đường hầm VPN Site-to-Site với AWS Transit Gateway. VPN này mô phỏng kết nối từ một vị trí tại TTDL (on-prem) với AWS cloud. Để giảm thiểu chi phí, chỉ một phiên bản VPN được cung cấp để hỗ trợ workshop này. Khi lập kế hoạch kết nối VPN cho production workloads của bạn, AWS khuyên bạn nên sử dụng nhiều thiết bị VPN để có tính sẵn sàng cao.
 
-![overview](/images/5-Workshop/5.1-Workshop-overview/diagram1.png)
+Dưới đây là danh sách các dịch vụ AWS được sử dụng để xây dựng kiến trúc cho game và vai trò cụ thể của từng dịch vụ:
+
+| Dịch vụ AWS | Thành phần trong game | Nhiệm vụ chính |
+| :--- | :--- | :--- |
+| **AWS Amplify Hosting** | Frontend Distribution | Lưu trữ & phân phối Web App React/TypeScript, CI/CD tự động. |
+| **Amazon Cognito** | Player Auth | Quản lý tài khoản, Đăng ký/Đăng nhập, cấp Token JWT. |
+| **API Gateway WebSocket** | Real-time Gateway | Duy trì kết nối hai chiều thời gian thực giữa Web và Server. |
+| **AWS Lambda** | Game Logic Engine | Xử lý logic trận đấu, kiểm tra Mana, bốc bài, tính toán sát thương. |
+| **Amazon DynamoDB** | NoSQL Database | Lưu GameState (TTL), User Profile, Match History, Connections. |
+| **Amazon SQS** | Message Queue | Đệm kết quả trận đấu để cập nhật Rank/EXP bất đồng bộ. |
