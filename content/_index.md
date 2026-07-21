@@ -67,7 +67,7 @@ chapter: false
 
 </div>
 <div class="student-photo">
-  <img src="/images/MS.jpg" alt="Student photo" />
+  <img src="images/avatar.png" alt="Student photo" />
   <p>Lê Anh Tiến</p>
 </div>
 </div>
@@ -81,3 +81,4 @@ chapter: false
 5.  [Workshop](/5-workshop/)
 6.  [Self-evaluation](/6-self-evaluation/)
 7.  [Sharing and Feedback](/7-feedback/)
+8.  [Resource](/8-Resources/)

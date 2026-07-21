@@ -67,8 +67,8 @@ chapter: false
 
 </div>
 <div class="student-photo">
-  <img src="/images/MS.jpg" alt="Ảnh sinh viên" />
-  <p>Ảnh sinh viên</p>
+  <img src="images/avatar.png" alt="Ảnh sinh viên" />
+  <p>Lê Anh Tiến</p>
 </div>
 </div>
 
@@ -81,3 +81,4 @@ chapter: false
 5.  [Workshop](/5-workshop/)
 6.  [Tự đánh giá](/6-self-evaluation/)
 7.  [Chia sẻ, đóng góp ý kiến](/7-feedback/)
+8.  [Tài nguyên](/8-Resources/)
