@@ -16,8 +16,30 @@ _Visit the [**GitHub Repository**](https://github.com/runeeyes584/TCG-AWS) to vi
 
 ---
 
-### Product Demo Video
+### Product Demo Videos
 
-{{< youtube D--lhTqzc4M >}}
+> Please use headphones or turn on audio for the best experience!
 
-_An overview video demonstrating the core features and gameplay experience._
+#### General overview and login/registration of TCG WEB GAME
+
+{{< youtube xxuV3ZCcOHI >}}
+
+_Video introducing the overall interface, features & login/registration of CHRONO GENESIS TCG._
+
+#### Core gameplay mechanics and TRIAL feature
+
+{{< youtube LkTUFqfDxVI >}}
+
+_Video introducing the core gameplay mechanics of CHRONO GENESIS TCG._
+
+#### AFK/Game freeze handling mechanism
+
+{{< youtube A64Zo1YXtxo >}}
+
+_Video introducing the AFK/Game freeze handling mechanism of CHRONO GENESIS TCG._
+
+#### Full gameplay demo Phuc Khang vs Anh Tien
+
+{{< youtube Tsjv_Fz_gPw >}}
+
+_Full gameplay demo video of CHRONO GENESIS TCG._

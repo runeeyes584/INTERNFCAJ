@@ -6,7 +6,6 @@ chapter: false
 pre: " <b> 5. </b> "
 ---
 
-
 # BUILDING A WEB GAME ON AWS WITH SERVERLESS ARCHITECTURE
 
 #### Overview
@@ -17,13 +16,19 @@ In this lab, you will learn how to design, configure, and deploy the **Chrono Ge
 
 We will leverage and combine the following core AWS services to build a complete two-way synchronized game system:
 
-+ **API Gateway (WebSocket API) & Amazon Cognito:** Maintains real-time connections between players and the system after successful user authentication using JWT Tokens.
+- **API Gateway (WebSocket API) & Amazon Cognito:** Maintains real-time connections between players and the system after successful user authentication using JWT Tokens.
 
-+ **AWS Lambda & Amazon SQS:** Lambda handles all game logic, while SQS asynchronously processes tasks such as updating Rank, EXP, and match history.
+- **AWS Lambda & Amazon SQS:** Lambda handles all game logic, while SQS asynchronously processes tasks such as updating Rank, EXP, and match history.
 
-+ **Amazon DynamoDB:** A comprehensive data hub that stores real-time match states and long-term player information.
+- **Amazon DynamoDB:** A comprehensive data hub that stores real-time match states and long-term player information.
 
-+ **AWS Amplify Hosting:** Globally distributes the Web frontend (React/TypeScript) and automates the CI/CD pipeline.
+- **AWS Amplify Hosting:** Globally distributes the Web frontend (React/TypeScript) and automates the CI/CD pipeline.
+
+#### A few words from the Lacrimosa team
+
+Although the project is directly deployed, to save time for grading, the team has recorded a total of 4 demo videos covering the game's core features. You can watch them in the [Resources](/8-resources/) section.
+
+> Live demo link: [TCG Chrono Genesis](https://dev.d3oenyc702mfnb.amplifyapp.com/)
 
 #### Contents
 
