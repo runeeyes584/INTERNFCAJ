@@ -1,7 +1,7 @@
 ---
 title: "Prerequisites"
 date: 2024-01-01
-weight: 1
+weight: 2
 chapter: false
 pre: " <b> 5.2. </b> "
 ---
@@ -9,8 +9,9 @@ pre: " <b> 5.2. </b> "
 Before starting the hands-on lab, you need to prepare the following tools and accounts:
 
 ## IAM ROLE
+
 - IAM Role for SQS that allows Lambda to send and receive messages from SQS
-![sqs](/images/5-Workshop/5.2-Prerequisite/sqs.png)
+  ![sqs](/images/5-Workshop/5.2-Prerequisite/sqs.png)
 
 ![sqs](/images/5-Workshop/5.2-Prerequisite/sqs3.png)
 
