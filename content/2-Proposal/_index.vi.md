@@ -35,7 +35,7 @@ Các kết nối thời gian thực hai chiều (Real-time WebSocket) được �
 
 Dữ liệu trò chơi và thông tin kết nối được lưu trữ tại Amazon DynamoDB. Ngoài ra, sau khi kết thúc trận đấu, các sự kiện được đẩy vào Amazon SQS để hàm Lambda (Post Match Worker) xử lý bất đồng bộ các tác vụ cập nhật Rank, EXP và lưu lịch sử trận đấu, đảm bảo hệ thống đạt hiệu năng cao và độ trễ cực thấp.
 
-![IoT Weather Station Architecture](/images/2-Proposal/ar2.png)
+![IoT Weather Station Architecture](/images/2-Proposal/ar3.png)
 
 _Dịch vụ AWS sử dụng_
 
@@ -44,8 +44,6 @@ _Dịch vụ AWS sử dụng_
 - _AWS Lambda_: Xử lý dữ liệu và kích hoạt Glue jobs (2 hàm).
 
 - _Amazon Route 53_: Giao tiếp với ứng dụng web.
-
-- _Amazon S3_: Quản lý tên miền và định tuyến lưu lượng truy cập của người chơi đến ứng dụng.
 
 - _Amazon Cognito_: Xác thực danh tính người chơi, quản lý phiên đăng nhập và cấp phát JWT Token.
 
