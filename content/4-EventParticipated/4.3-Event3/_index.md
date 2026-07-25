@@ -99,5 +99,5 @@ Attending the **"FCAJ - Agentic AI Build Week"** event was an intensely hands-on
 
 #### Some photos from the event
 
-![Event3a](/images/4-Events/ev31.png)
-![Event3b](/images/4-Events/ev32.png)
+![Event3a](/images/4-Event/ev31.png)
+![Event3b](/images/4-Event/ev32.png)

@@ -99,5 +99,5 @@ Tham gia sự kiện **"FCAJ - Agentic AI Build Week"** là một trải nghiệ
 
 #### Một số hình ảnh khi tham gia sự kiện
 
-![Event3a](/images/4-Events/ev31.png)
-![Event3b](/images/4-Events/ev32.png)
+![Event3a](/images/4-Event/ev31.png)
+![Event3b](/images/4-Event/ev32.png)
