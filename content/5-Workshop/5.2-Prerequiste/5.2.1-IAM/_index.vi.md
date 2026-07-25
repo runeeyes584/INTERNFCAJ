@@ -1,30 +1,12 @@
 ---
 title: "Các bước chuẩn bị"
 date: 2024-01-01
-weight: 2
+weight: 21
 chapter: false
 pre: " <b> 5.2.1 </b> "
 ---
 
 Trước khi bắt đầu bài thực hành, bạn cần chuẩn bị các tài nguyên AWS và các quyền truy cập cần thiết để triển khai hệ thống.
-
-## IAM Role cho AWS Lambda
-
-Tạo IAM Role cho Lambda và gán các quyền cần thiết để Lambda có thể truy cập các dịch vụ AWS như Amazon DynamoDB, Amazon Cognito, Amazon CloudWatch Logs, Amazon SQS và các dịch vụ khác được sử dụng trong hệ thống.
-
-![lambda-role](/images/5-Workshop/5.2-Prerequisite/Screenshot2026-07-21022537.png)
-
-![lambda-role](/images/5-Workshop/5.2-Prerequisite/Screenshot2026-07-21022934.png)
-
-![lambda-role](/images/5-Workshop/5.2-Prerequisite/Screenshot2026-07-21023113.png)
-
-![lambda-role](/images/5-Workshop/5.2-Prerequisite/iam_for_lamda1.png)
-
-![lambda-role](/images/5-Workshop/5.2-Prerequisite/iam_for_lamda2.png)
-
-![lambda-role](/images/5-Workshop/5.2-Prerequisite/Screenshot2026-07-21023131.png)
-
----
 
 ## IAM Role cho Amazon SQS
 
@@ -43,6 +25,20 @@ Tạo IAM Role cho phép AWS Lambda gửi và nhận message từ Amazon SQS.
 Thêm **Amazon SQS Policy** vào IAM Role của Lambda để Lambda có thể đọc và ghi message từ hàng đợi.
 
 ![sqs](/images/5-Workshop/5.2-Prerequisite/addsqspolicyforlambda.png)
+
+---
+
+## IAM Role cho AWS Lambda
+
+Tạo IAM Role cho Lambda và gán các quyền cần thiết để Lambda có thể truy cập các dịch vụ AWS như Amazon DynamoDB, Amazon Cognito, Amazon CloudWatch Logs, Amazon SQS và các dịch vụ khác được sử dụng trong hệ thống.
+
+![lambda-role](/images/5-Workshop/5.2-Prerequisite/Screenshot2026-07-21022537.png)
+
+![lambda-role](/images/5-Workshop/5.2-Prerequisite/Screenshot2026-07-21022934.png)
+
+![lambda-role](/images/5-Workshop/5.2-Prerequisite/Screenshot2026-07-21023113.png)
+
+![lambda-role](/images/5-Workshop/5.2-Prerequisite/Screenshot2026-07-21023131.png)
 
 ---
 
